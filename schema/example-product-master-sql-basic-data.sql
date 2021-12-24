@@ -1,6 +1,6 @@
 CREATE TABLE `example_product_master_basic_data`
 (
-    `Product`               varchar(40) DEFAULT NULL,
+    `Product`               varchar(40),
     `Product_desc`          varchar(40) DEFAULT NULL,
     `BaseUnit`              varchar(3) DEFAULT NULL,
     `ValidityStartDate`     date DEFAULT NULL,
