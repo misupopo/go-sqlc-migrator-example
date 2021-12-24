@@ -1,17 +1,35 @@
-mysql:
-  image : mysql:5.7
-  ports:
-    - "3306:3306"
-  volumes:
-    - ./db/mysql:/var/lib/mysql
-    - ./config.cnf:/etc/mysql/conf.d/config.cnf
-    - ./schema:/schema
-    - ./init-dump:/docker-entrypoint-initdb.d
-  environment:
-    TERM: xterm
-    APP_ENV: dev
-    MYSQL_USER: example
-    MYSQL_PASSWORD: example1234
-    MYSQL_DATABASE: example
-    MYSQL_ROOT_PASSWORD: root
-  container_name: mysql
+version: "3.6"
+services:
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db/mysql:/var/lib/mysql
+      - ./config.cnf:/etc/mysql/conf.d/config.cnf
+      - ./schema:/schema
+      - ./init-dump:/docker-entrypoint-initdb.d
+    environment:
+      TERM: xterm
+      APP_ENV: dev
+      MYSQL_USER: example
+      MYSQL_PASSWORD: example1234
+      MYSQL_DATABASE: example
+      MYSQL_ROOT_PASSWORD: root
+    container_name: mysql
+    networks:
+      - mysql
+
+  goservice:
+    build: "."
+    ports:
+      - "8080"
+    tty: true
+    volumes:
+      - ./:/go/src/app
+    networks:
+      - mysql
+
+networks:
+  mysql:
+    driver: bridge
