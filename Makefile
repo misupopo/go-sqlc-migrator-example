@@ -5,3 +5,8 @@ go-mod-init:
 # https://docs.sqlc.dev/en/latest/overview/install.html
 generate:
 	sqlc generate
+
+# mysql -uexample -pexample1234
+sh:
+	docker exec -it mysql /bin/bash
+
