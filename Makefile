@@ -7,7 +7,7 @@ go-get:
 
 # install方法はmacやgolangもしくはubuntuなどがある
 # https://docs.sqlc.dev/en/latest/overview/install.html
-generate:
+sqlc-generate:
 	sqlc generate
 
 # sqlboilerの実行
