@@ -20,7 +20,7 @@ services:
     networks:
       - mysql
 
-  goservice:
+  sqlboiler:
     build: "."
     ports:
       - "8080"

@@ -10,13 +10,20 @@ go-get:
 generate:
 	sqlc generate
 
-# mysql -uexample -pexample1234
-sh:
-	docker exec -it mysql /bin/bash
-
+# sqlboilerの実行
+# 実行するとmodelのdirectoryが作成される（sqlboiler.tomlのoutput）
 sqlboiler-generate:
 	sqlboiler mysql
 
+# mysql -uexample -pexample1234
+sh-mysql:
+	docker exec -it mysql /bin/bash
+
+# おそらくttyがtrueになっているため/bin/shじゃないと入れない
+sh-sqlboiler:
+	docker exec -it $(shell docker ps -aqf "name=sqlboiler") /bin/sh
+
 # sqlboilerをdocker containerで実行するため
 go-run:
-	docker run -it -v $(shell pwd):/go/src/app golang
+	docker run -it -v $(shell pwd):/go/src/app sqlboiler
+
